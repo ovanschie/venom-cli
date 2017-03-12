@@ -55,12 +55,12 @@ class Hosts
      *
      * @param        $ip
      * @param        $domain
-     * @param string $subDomains
+     * @param string $aliases
      *
      * @return $this
      * @throws Exception
      */
-    public function addLine($ip, $domain, $subDomains = '')
+    public function addLine($ip, $domain, $aliases = '')
     {
         if (!filter_var($ip, FILTER_VALIDATE_IP)) {
             throw new Exception(sprintf("'%s', is not a valid ip", $ip));
@@ -70,7 +70,7 @@ class Hosts
             throw new Exception(sprintf("'%s', is not a valid domain", $ip));
         }
 
-        $this->lines[$domain] = ['ip' => $ip, 'subdomains' => $subDomains];
+        $this->lines[$domain] = ['ip' => $ip, 'aliases' => $aliases];
 
         return $this;
     }
@@ -110,13 +110,34 @@ class Hosts
      */
     protected function parseLine($line)
     {
-        $regex = "/^\\s*(?:#.*$)|(?<ip>(?:[0-9\\.]+)|(?:[A-Fa-f0-9:]+))\\s+(?<name>[a-zA-Z0-9\\.]+)\\s*(?:#.*)?$/mi";
+        $matches = $this->explodeLine($line);
 
-        if (preg_match($regex, $line, $matches) > 0) {
-            if (isset($matches['ip']) && isset($matches['name'])) {
-                $this->addLine($matches['ip'], $matches['name']);
+        if (isset($matches[1], $matches[2])) {
+
+            $ip = $matches[1];
+            $domainLine = $this->explodeLine($matches[2]);
+
+            if (isset($domainLine[1])) {
+                $domain = $domainLine[1];
+                $aliases = isset($domainLine[2]) ? $domainLine[2] : '';
+
+                $this->addLine($ip, $domain, $aliases);
             }
         }
+    }
+
+    /**
+     * Explode entry by whitespace regex
+     *
+     * @param $line
+     *
+     * @return mixed
+     */
+    protected function explodeLine($line)
+    {
+        preg_match("/^\s*?(.+?)\s+(.+?)$/i", $line, $matches);
+
+        return $matches;
     }
 
     /**
@@ -135,8 +156,8 @@ class Hosts
 
         $file = fopen($filePath, 'w');
 
-        foreach ($this->lines as $domainLine => $ip) {
-            fwrite($file, "$ip\t\t$domainLine \r\n");
+        foreach ($this->lines as $domain => $attributes) {
+            fwrite($file, $attributes['ip'] . "\t\t" . $domain ." " . $attributes['aliases'] . " \r\n");
         }
 
         fclose($file);

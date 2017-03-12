@@ -1,0 +1,14 @@
+#! /usr/bin/env php
+
+<?php
+
+use Symfony\Component\Console\Application;
+use Venom\SetCommand;
+
+require 'vendor/autoload.php';
+
+$app = new Application('Venom CLI', '0.0.1');
+
+$app->add(new SetCommand());
+
+$app->run();

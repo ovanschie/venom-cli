@@ -28,8 +28,16 @@ class Hosts
      *
      * @throws Exception
      */
-    public function __construct($filePath)
+    public function __construct($filePath = null)
     {
+        if (is_null($filePath)) {
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                $filePath = 'C:/Windows/System32/drivers/etc/hosts';
+            } else {
+                $filePath = '/etc/hosts';
+            }
+        }
+
         if (!is_file($filePath) || !is_readable($filePath)) {
             throw new Exception(sprintf('Unable to read file: %s', $filePath));
         }
@@ -66,7 +74,7 @@ class Hosts
             throw new Exception(sprintf("'%s', is not a valid ip", $ip));
         }
 
-        if (!filter_var($domain, FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[a-zA-Z0-9\\.]*[a-zA-Z0-9]+?/"]])) {
+        if (!filter_var($domain, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => "/^[a-zA-Z0-9\\.]*[a-zA-Z0-9]+?/"]])) {
             throw new Exception(sprintf("'%s', is not a valid domain", $ip));
         }
 

@@ -10,15 +10,22 @@ use Symfony\Component\Console\Output\OutputInterface;
 class SetCommand extends Command
 {
 
+    /**
+     *
+     */
     public function configure()
     {
         $this->setName('set')
-                ->setDescription('Add an entry to the hosts file')
+                ->setDescription('Add/update hosts file entry')
                 ->addArgument('ip', InputArgument::REQUIRED, 'IP-adres')
                 ->addArgument('domain', InputArgument::REQUIRED, 'Domain')
                 ->addArgument('aliases', InputArgument::OPTIONAL, 'Aliases');
     }
 
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $aliases = '';

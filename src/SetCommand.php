@@ -9,10 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SetCommand extends Command
 {
-
-    /**
-     *
-     */
     public function configure()
     {
         $this->setName('set')
@@ -34,10 +30,9 @@ class SetCommand extends Command
             $aliases = $input->getArgument('aliases');
         }
 
-        $host = new Hosts("/Users/olav/Desktop/testhosts");
+        $host = new Hosts('/Users/olav/Desktop/testhosts');
         $host->addLine($input->getArgument('ip'), $input->getArgument('domain'), $aliases)->save();
 
         $output->writeln(sprintf('Added: %s %s %s', $input->getArgument('ip'), $input->getArgument('domain'), $aliases));
     }
-
 }

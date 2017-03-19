@@ -20,6 +20,7 @@
         "symfony/console": "^3.2"
     },
     "require-dev": {
+        "kherge/box": "^2.7",
         "phpunit/phpunit": "5.*"
     },
     "autoload": {
@@ -33,9 +34,19 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/phpunit",
+        "box": "vendor/bin/box"
     },
     "config": {
         "sort-packages": true
-  }
+    },
+    "extra": {
+        "phar-builder": {
+            "compression": "GZip",
+            "name": "venom.phar",
+            "output-dir": "../",
+            "entry-point": "./venom",
+            "include-dev": false
+        }
+    }
 }

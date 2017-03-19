@@ -33,6 +33,6 @@ class SetCommand extends Command
         $host = new Hosts('/Users/olav/Desktop/testhosts');
         $host->addLine($input->getArgument('ip'), $input->getArgument('domain'), $aliases)->save();
 
-        $output->writeln(sprintf('Added: %s %s %s', $input->getArgument('ip'), $input->getArgument('domain'), $aliases));
+        $output->writeln(sprintf('Set: %s %s %s', $input->getArgument('ip'), $input->getArgument('domain'), $aliases));
     }
 }

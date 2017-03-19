@@ -38,18 +38,18 @@ class Hosts
             }
         }
 
-        if (! is_file($filePath) || ! is_readable($filePath)) {
+        if (!is_file($filePath) || !is_readable($filePath)) {
             throw new Exception(sprintf('Unable to read file: %s', $filePath));
         }
 
         $this->filePath = realpath($filePath);
-        $this->bakPath = realpath($filePath).'.bak';
+        $this->bakPath = realpath($filePath) . '.bak';
 
         $this->readFile();
     }
 
     /**
-     * Return lines.
+     * Return lines
      *
      * @return array
      */
@@ -59,7 +59,7 @@ class Hosts
     }
 
     /**
-     * Add a line.
+     * Add a line
      *
      * @param        $ip
      * @param        $domain
@@ -70,12 +70,12 @@ class Hosts
      */
     public function addLine($ip, $domain, $aliases = '')
     {
-        if (! filter_var($ip, FILTER_VALIDATE_IP)) {
+        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
             throw new Exception(sprintf("'%s', is not a valid ip", $ip));
         }
 
-        if (! filter_var($domain, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/^[a-zA-Z0-9\\.]*[a-zA-Z0-9]+?/']])) {
-            throw new Exception(sprintf("'%s', is not a valid domain", $ip));
+        if (!filter_var($domain, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => "/^[a-zA-Z0-9\\.]*[a-zA-Z0-9]+?/"]])) {
+            throw new Exception(sprintf("'%s', is not a valid domain", $domain));
         }
 
         $this->lines[$domain] = ['ip' => $ip, 'aliases' => $aliases];
@@ -84,7 +84,24 @@ class Hosts
     }
 
     /**
-     * Save the file.
+     * @param $domain
+     *
+     * @return $this
+     * @throws Exception
+     */
+    public function removeLine($domain)
+    {
+        if (!filter_var($domain, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => "/^[a-zA-Z0-9\\.]*[a-zA-Z0-9]+?/"]])) {
+            throw new Exception(sprintf("'%s', is not a valid domain", $domain));
+        }
+
+        unset($this->lines[$domain]);
+
+        return $this;
+    }
+
+    /**
+     * Save the file
      *
      * @param null $filePath
      */
@@ -98,13 +115,13 @@ class Hosts
     }
 
     /**
-     * Read the File.
+     * Read the File
      */
     protected function readFile()
     {
         $file = fopen($this->filePath, 'r');
 
-        while (($line = fgets($file)) !== false) {
+        while(($line = fgets($file)) !== false) {
             $this->parseLine($line);
         }
 
@@ -112,7 +129,7 @@ class Hosts
     }
 
     /**
-     * Parse a line.
+     * Parse a line
      *
      * @param $line
      */
@@ -121,6 +138,7 @@ class Hosts
         $matches = $this->explodeLine($line);
 
         if (isset($matches[1], $matches[2])) {
+
             $ip = $matches[1];
             $domainLine = $this->explodeLine($matches[2]);
 
@@ -134,7 +152,7 @@ class Hosts
     }
 
     /**
-     * Explode entry by whitespace regex.
+     * Explode entry by whitespace regex
      *
      * @param $line
      *
@@ -148,7 +166,7 @@ class Hosts
     }
 
     /**
-     * Write lines to the file.
+     * Write lines to the file
      *
      * @param $filePath
      *
@@ -157,14 +175,14 @@ class Hosts
      */
     protected function writeFile($filePath)
     {
-        if (is_file($filePath) && ! is_writable($filePath)) {
+        if (is_file($filePath) && !is_writable($filePath)) {
             throw new Exception(sprintf("File '%s' is not writable", $filePath));
         }
 
         $file = fopen($filePath, 'w');
 
         foreach ($this->lines as $domain => $attributes) {
-            fwrite($file, $attributes['ip']."\t\t".$domain.' '.$attributes['aliases']." \r\n");
+            fwrite($file, $attributes['ip'] . "\t\t" . $domain ." " . $attributes['aliases'] . " \r\n");
         }
 
         fclose($file);

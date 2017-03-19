@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\Table;
 
-class ListCommand extends Command
+class ShowCommand extends Command
 {
 
     /**
@@ -16,8 +16,8 @@ class ListCommand extends Command
      */
     public function configure()
     {
-        $this->setName('list')
-                ->setDescription('List hosts file entries');
+        $this->setName('show')
+                ->setDescription('Show/List hosts file entries');
     }
 
     /**

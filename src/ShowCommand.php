@@ -2,6 +2,7 @@
 
 namespace Venom;
 
+use Appstract\HostsFile\Processor as HostsFile;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,7 +27,7 @@ class ShowCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $host = new Hosts("/Users/olav/Desktop/testhosts");
+        $host = new HostsFile("/Users/olav/Desktop/testhosts");
         $lines = $host->getLines();
 
         $parsedEntries = array_map(function ($domain, $attributes) {

@@ -1,9 +1,9 @@
 {
-    "name": "appstract/:package_name",
-    "description": ":package_description",
+    "name": "appstract/venom-cli",
+    "description": "Venom CLI",
     "keywords": [
         "appstract",
-        ":package_name"
+        "venom"
     ],
     "homepage": "https://github.com/appstract/:package_name",
     "license": "MIT",
@@ -17,6 +17,7 @@
     ],
     "require": {
         "php": "^5.5",
+        "appstract/php-hostsfile": "^0.1.1",
         "symfony/console": "^3.2"
     },
     "require-dev": {

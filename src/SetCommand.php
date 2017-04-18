@@ -2,6 +2,7 @@
 
 namespace Venom;
 
+use Appstract\HostsFile\Processor as HostsFile;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,7 +31,7 @@ class SetCommand extends Command
             $aliases = $input->getArgument('aliases');
         }
 
-        $host = new Hosts('/Users/olav/Desktop/testhosts');
+        $host = new HostsFile('/Users/olav/Desktop/testhosts');
         $host->addLine($input->getArgument('ip'), $input->getArgument('domain'), $aliases)->save();
 
         $output->writeln(sprintf('Set: %s %s %s', $input->getArgument('ip'), $input->getArgument('domain'), $aliases));

@@ -2,6 +2,7 @@
 
 namespace Venom;
 
+use Appstract\HostsFile\Processor as HostsFile;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,7 +27,7 @@ class RemoveCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $host = new Hosts("/Users/olav/Desktop/testhosts");
+        $host = new HostsFile("/Users/olav/Desktop/testhosts");
         $host->removeLine($input->getArgument('domain'))->save();
 
         $output->writeln(sprintf('Removed: %s',$input->getArgument('domain')));

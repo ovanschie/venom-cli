@@ -7,7 +7,7 @@ use Venom\SetCommand;
 use Venom\RemoveCommand;
 use Venom\ShowCommand;
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 $app = new Application('Venom CLI', '@package_version@');
 

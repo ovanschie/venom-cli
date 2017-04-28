@@ -13,12 +13,6 @@ You can install Venom-CLI by running the following command:
 $ wget https://raw.githubusercontent.com/ovanschie/venom-cli/master/install.sh -O - | sh```
 ```
 
-## Testing
-
-``` bash
-$ composer test
-```
-
 ## Contributing
 
 Contributions are welcome, [thanks to y'all](https://github.com/appstract/:package_name/graphs/contributors) :)

@@ -1,8 +1,8 @@
 #! /usr/bin/env php
-
 <?php
 
 use Symfony\Component\Console\Application;
+use Venom\UpdateCommand;
 use Venom\SetCommand;
 use Venom\RemoveCommand;
 use Venom\ShowCommand;

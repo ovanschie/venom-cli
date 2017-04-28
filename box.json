@@ -12,12 +12,12 @@
         {
             "name": "*.php",
             "exclude": [
-              "phpunit",
-              "phpunit-test-case",
-              "Tester",
-              "Tests",
-              "tests",
-              "yaml"
+                "phpunit",
+                "phpunit-test-case",
+                "Tester",
+                "Tests",
+                "tests",
+                "yaml"
             ],
             "in": "vendor"
         }

@@ -10,12 +10,12 @@
 You can install Venom-CLI by running the following command:
 
 ``` bash
-$ wget https://raw.githubusercontent.com/ovanschie/venom-cli/master/install.sh -O - | sh```
+$ wget https://raw.githubusercontent.com/ovanschie/venom-cli/master/install.sh -O - | sh
 ```
 
 ## Contributing
 
-Contributions are welcome, [thanks to y'all](https://github.com/appstract/:package_name/graphs/contributors) :)
+Contributions are welcome, [thanks to y'all](graphs/contributors) :)
 
 ## About Appstract
 

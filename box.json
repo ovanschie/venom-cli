@@ -1,28 +1,29 @@
 {
-  "alias": "venom.phar",
-  "chmod": "0755",
-  "compactors": [
-      "Herrera\\Box\\Compactor\\Json",
-      "Herrera\\Box\\Compactor\\Php"
-  ],
-  "directories": ["src", "vendor"],
-  "extract": true,
-  "files": [],
-  "finder": [
-      {
-          "name": "*.php",
-          "exclude": [
+    "alias": "venom.phar",
+    "chmod": "0755",
+    "compactors": [
+        "Herrera\\Box\\Compactor\\Json",
+        "Herrera\\Box\\Compactor\\Php"
+    ],
+    "directories": ["src", "vendor"],
+    "extract": true,
+    "files": ["LICENSE.md", "vendor/herrera-io/phar-update/res/schema.json"],
+    "finder": [
+        {
+            "name": "*.php",
+            "exclude": [
               "phpunit",
               "phpunit-test-case",
               "Tester",
               "Tests",
               "tests",
               "yaml"
-          ],
-          "in": "vendor"
-      }
-  ],
-  "main": "src/venom.php",
-  "output": "venom.phar",
-  "stub": true
+            ],
+            "in": "vendor"
+        }
+    ],
+    "git-version": "package_version",
+    "main": "src/venom.php",
+    "output": "venom.phar",
+    "stub": true
 }

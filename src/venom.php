@@ -9,8 +9,9 @@ use Venom\ShowCommand;
 
 require 'vendor/autoload.php';
 
-$app = new Application('Venom CLI', '0.0.1');
+$app = new Application('Venom CLI', '@package_version@');
 
+$app->add(new UpdateCommand());
 $app->add(new SetCommand());
 $app->add(new RemoveCommand());
 $app->add(new ShowCommand());

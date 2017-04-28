@@ -15,7 +15,7 @@ $ wget https://raw.githubusercontent.com/ovanschie/venom-cli/master/install.sh -
 
 ## Contributing
 
-Contributions are welcome, [thanks to y'all](graphs/contributors) :)
+Contributions are welcome, [thanks to y'all](https://github.com/ovanschie/venom-cli/graphs/contributors) :)
 
 ## About Appstract
 

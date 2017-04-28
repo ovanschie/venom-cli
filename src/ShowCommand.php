@@ -27,7 +27,7 @@ class ShowCommand extends Command
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $host = new HostsFile("/Users/olav/Desktop/testhosts");
+        $host = new HostsFile();
         $lines = $host->getLines();
 
         $parsedEntries = array_map(function ($domain, $attributes) {

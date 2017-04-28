@@ -5,7 +5,7 @@
         "appstract",
         "venom"
     ],
-    "homepage": "https://github.com/appstract/:package_name",
+    "homepage": "https://github.com/appstract/venom-cli",
     "license": "MIT",
     "authors": [
         {
@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^5.5",
-        "appstract/php-hostsfile": "^0.1.1",
+        "appstract/php-hostsfile": "^0.1.2",
         "symfony/console": "^3.2"
     },
     "require-dev": {
@@ -40,14 +40,5 @@
     },
     "config": {
         "sort-packages": true
-    },
-    "extra": {
-        "phar-builder": {
-            "compression": "GZip",
-            "name": "venom.phar",
-            "output-dir": "../",
-            "entry-point": "./venom",
-            "include-dev": false
-        }
     }
 }

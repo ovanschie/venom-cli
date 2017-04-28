@@ -2,6 +2,7 @@
 
 namespace Venom;
 
+use Exception;
 use Appstract\HostsFile\Processor as HostsFile;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -27,11 +28,19 @@ class SetCommand extends Command
     {
         $aliases = '';
 
+        if (! filter_var($input->getArgument('ip'), FILTER_VALIDATE_IP)) {
+            throw new Exception(sprintf("'%s', is not a valid ip", $input->getArgument('ip')));
+        }
+
+        if (! filter_var($input->getArgument('domain'), FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/^[a-zA-Z0-9\\.]*[a-zA-Z0-9]+?/']])) {
+            throw new Exception(sprintf("'%s', is not a valid domain", $input->getArgument('domain')));
+        }
+
         if ($input->hasArgument('aliases')) {
             $aliases = $input->getArgument('aliases');
         }
 
-        $host = new HostsFile('/Users/olav/Desktop/testhosts');
+        $host = new HostsFile();
         $host->addLine($input->getArgument('ip'), $input->getArgument('domain'), $aliases)->save();
 
         $output->writeln(sprintf('Set: %s %s %s', $input->getArgument('ip'), $input->getArgument('domain'), $aliases));

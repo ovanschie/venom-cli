@@ -9,7 +9,11 @@ use Venom\ShowCommand;
 
 require '../vendor/autoload.php';
 
-$app = new Application('Venom CLI', '@package_version@');
+$app = new Application('
+ __   _____ _ __   ___  _ __ ___  
+ \ \ / / _ \ \'_ \ / _ \| \'_ ` _ \ 
+  \ V /  __/ | | | (_) | | | | | |
+   \_/ \___|_| |_|\___/|_| |_| |_| ', '@package_version@');
 
 $app->add(new UpdateCommand());
 $app->add(new SetCommand());

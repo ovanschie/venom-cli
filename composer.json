@@ -18,7 +18,6 @@
     "require": {
         "php": "^5.5",
         "appstract/php-hostsfile": "^0.1.2",
-        "herrera-io/phar-update": "^2.0",
         "symfony/console": "^3.2"
     },
     "require-dev": {

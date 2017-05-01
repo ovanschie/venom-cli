@@ -6,6 +6,7 @@ use Venom\UpdateCommand;
 use Venom\SetCommand;
 use Venom\RemoveCommand;
 use Venom\ShowCommand;
+use Venom\SudoerCommand;
 
 require '../vendor/autoload.php';
 
@@ -19,5 +20,6 @@ $app->add(new UpdateCommand());
 $app->add(new SetCommand());
 $app->add(new RemoveCommand());
 $app->add(new ShowCommand());
+$app->add(new SudoerCommand());
 
 $app->run();

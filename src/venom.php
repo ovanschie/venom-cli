@@ -1,12 +1,12 @@
 #! /usr/bin/env php
 <?php
 
-use Symfony\Component\Console\Application;
-use Venom\UpdateCommand;
 use Venom\SetCommand;
-use Venom\RemoveCommand;
 use Venom\ShowCommand;
+use Venom\RemoveCommand;
 use Venom\SudoerCommand;
+use Venom\UpdateCommand;
+use Symfony\Component\Console\Application;
 
 require '../vendor/autoload.php';
 

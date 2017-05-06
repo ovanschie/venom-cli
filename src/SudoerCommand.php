@@ -2,19 +2,16 @@
 
 namespace Venom;
 
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Filesystem\Filesystem;
 
 class SudoerCommand extends Command
 {
     protected $file = '/etc/sudoers.d/venom';
 
-    /**
-     *
-     */
     protected function configure()
     {
         $this->setName('sudoer')
@@ -31,7 +28,7 @@ class SudoerCommand extends Command
     {
         if ($input->getOption('add')) {
             $output->writeln($this->writeFile());
-        } else if ($input->getOption('remove')) {
+        } elseif ($input->getOption('remove')) {
             $output->writeln($this->removeFile());
         } else {
             $output->writeln('No option given');
@@ -39,7 +36,7 @@ class SudoerCommand extends Command
     }
 
     /**
-     * add sudoers file
+     * add sudoers file.
      */
     protected function writeFile()
     {
@@ -56,13 +53,13 @@ class SudoerCommand extends Command
     }
 
     /**
-     * remove sudoers file
+     * remove sudoers file.
      */
     protected function removeFile()
     {
         $fs = new Filesystem();
 
-        if (!file_exists($this->file)) {
+        if (! file_exists($this->file)) {
             return 'Entry does not exists';
         } else {
             $fs->remove($this->file);

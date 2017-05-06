@@ -2,19 +2,14 @@
 
 namespace Venom;
 
-use Appstract\HostsFile\Processor as HostsFile;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+use Appstract\HostsFile\Processor as HostsFile;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\Table;
 
 class ShowCommand extends Command
 {
-
-    /**
-     *
-     */
     public function configure()
     {
         $this->setName('show')
@@ -39,7 +34,6 @@ class ShowCommand extends Command
                 ->setRows($parsedEntries)
                 ->render();
 
-        $output->writeln(PHP_EOL . sprintf('Listed: %s lines', count($lines)));
+        $output->writeln(PHP_EOL.sprintf('Listed: %s lines', count($lines)));
     }
-
 }

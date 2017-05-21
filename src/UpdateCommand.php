@@ -7,6 +7,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use Appstract\LushHttp\Lush;
 
 class UpdateCommand extends Command
 {
@@ -22,13 +23,23 @@ class UpdateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $process = new Process('curl https://raw.githubusercontent.com/ovanschie/venom-cli/master/install.sh -0 | sh');
-        $process->run();
+        $app_version = '@package_version@';
+        $releases = (new Lush('https://api.github.com/repos/ovanschie/venom-cli'))->get('tags')->getResult();
+        $remote_version = $releases[0]->name;
 
-        if (! $process->isSuccessful()) {
-            throw new ProcessFailedException($process);
+        if (version_compare($app_version, $remote_version, '<')) {
+            $output->writeln('Downloading update...');
+
+            $process = new Process('curl https://raw.githubusercontent.com/ovanschie/venom-cli/master/install.sh -0 | sh');
+            $process->run();
+
+            if (! $process->isSuccessful()) {
+                throw new ProcessFailedException($process);
+            }
+
+            echo $process->getOutput();
+        } else {
+            $output->writeln('This is the latest version');
         }
-
-        echo $process->getOutput();
     }
 }

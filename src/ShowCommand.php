@@ -25,13 +25,9 @@ class ShowCommand extends Command
         $host = new HostsFile();
         $lines = $host->getLines();
 
-        $parsedEntries = array_map(function ($domain, $attributes) {
-            return [trim($attributes['ip']), trim($domain), trim($attributes['aliases'])];
-        }, array_keys($lines), $lines);
-
         $table = new Table($output);
         $table->setHeaders(['Ip', 'Domain', 'Aliases'])
-                ->setRows($parsedEntries)
+                ->setRows($lines)
                 ->render();
 
         $output->writeln(PHP_EOL.sprintf('Listed: %s lines', count($lines)));

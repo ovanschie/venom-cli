@@ -23,11 +23,11 @@ class SetCommand extends Command
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
+     *
+     * @throws Exception
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $aliases = '';
-
         if (! filter_var($input->getArgument('ip'), FILTER_VALIDATE_IP)) {
             throw new Exception(sprintf("'%s', is not a valid ip", $input->getArgument('ip')));
         }
@@ -36,12 +36,14 @@ class SetCommand extends Command
             throw new Exception(sprintf("'%s', is not a valid domain", $input->getArgument('domain')));
         }
 
+        $aliases = '';
+
         if ($input->hasArgument('aliases')) {
             $aliases = $input->getArgument('aliases');
         }
 
         $host = new HostsFile();
-        $host->addLine($input->getArgument('ip'), $input->getArgument('domain'), $aliases)->save();
+        $host->set($input->getArgument('ip'), $input->getArgument('domain'), $aliases)->save();
 
         $output->writeln(sprintf('Set: %s %s %s', $input->getArgument('ip'), $input->getArgument('domain'), $aliases));
     }

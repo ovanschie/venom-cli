@@ -9,7 +9,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
+            "name": "Olav van Schie",
             "email": "hello@appstract.team",
             "homepage": "https://appstract.team",
             "role": "Developer"
@@ -17,7 +17,7 @@
     ],
     "require": {
         "appstract/lush-http": "^0.2.0",
-        "appstract/php-hostsfile": "^0.1.2",
+        "appstract/php-hostsfile": "^0.2.0",
         "symfony/console": "^3.2",
         "symfony/filesystem": "^3.2"
     },

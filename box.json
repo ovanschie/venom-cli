@@ -1,5 +1,5 @@
 {
-    "alias": "venom.phar",
+    "alias": "venom-cli.phar",
     "chmod": "0755",
     "compactors": [
         "Herrera\\Box\\Compactor\\Json",
@@ -24,6 +24,6 @@
     ],
     "git-version": "package_version",
     "main": "src/venom.php",
-    "output": "venom.phar",
+    "output": "venom-cli.phar",
     "stub": true
 }

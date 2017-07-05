@@ -28,7 +28,7 @@ class ShowCommand extends Command
         $lines = $host->getLines();
 
         if ($input->getOption('plain')) {
-            foreach($lines as $key => $line) {
+            foreach ($lines as $key => $line) {
                 $output->writeLn($line['ip'].' '.$line['domain'].' '.$line['aliases']);
             }
         } else {

@@ -17,16 +17,12 @@ class ShowCommand extends Command
      */
     protected $output;
 
-    /**
-     *
-     */
     public function configure()
     {
         $this->setName('show')
                 ->setDescription('Show/List hosts file entries')
                 ->addOption('output', null, InputOption::VALUE_REQUIRED, 'Output as plain text or JSON');
     }
-
 
     /**
      * @param InputInterface  $input
@@ -42,7 +38,7 @@ class ShowCommand extends Command
         $lines = $host->getLines();
         $format = $input->getOption('output') ? $input->getOption('output') : 'table';
 
-        if (!in_array($format, ['plain', 'json', 'table'])) {
+        if (! in_array($format, ['plain', 'json', 'table'])) {
             throw new Exception(sprintf('%s is not a valid option, use plain, json or table', $format));
         }
 

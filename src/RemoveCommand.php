@@ -24,7 +24,14 @@ class RemoveCommand extends Command
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $host = new HostsFile();
-        $host->removeLine($input->getArgument('domain'))->save();
+
+        $domains = explode(',', $input->getArgument('domain'));
+
+        foreach ($domains as $domain) {
+            $host->removeLine($domain);
+        }
+
+        $host->save();
 
         $output->writeln(sprintf('Removed: %s', $input->getArgument('domain')));
     }

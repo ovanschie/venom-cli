@@ -12,16 +12,12 @@ class RemoveCommand extends Command
 {
     protected $output;
 
-    /**
-     *
-     */
     public function configure()
     {
         $this->setName('remove')
                 ->setDescription('Remove hosts file entry')
                 ->addArgument('domain', InputArgument::REQUIRED, 'Domain');
     }
-
 
     /**
      * @param InputInterface  $input
@@ -54,9 +50,6 @@ class RemoveCommand extends Command
         $this->output->writeln(sprintf('Removed: %s', implode(' ', $domains)));
     }
 
-    /**
-     *
-     */
     protected function removeAll()
     {
         $host = new HostsFile();

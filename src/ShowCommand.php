@@ -17,6 +17,9 @@ class ShowCommand extends Command
      */
     protected $output;
 
+    /**
+     *
+     */
     public function configure()
     {
         $this->setName('show')
@@ -54,7 +57,7 @@ class ShowCommand extends Command
     protected function formatPlain($lines)
     {
         foreach ($lines as $key => $line) {
-            $this->output->writeLn($line['ip'].' '.$line['domain'].' '.$line['aliases']);
+            $this->output->writeLn($line['ip'].' '.$line['domain'].' '.implode(' ', $line['aliases']));
         }
     }
 
@@ -73,9 +76,35 @@ class ShowCommand extends Command
     {
         $table = new Table($this->output);
         $table->setHeaders(['Ip', 'Domain', 'Aliases'])
-            ->setRows($lines)
+            ->setRows($this->getTableLines($lines))
             ->render();
 
         $this->output->writeln(PHP_EOL.sprintf('Listed: %s lines', count($lines)));
+    }
+
+    /**
+     * @param $lines
+     *
+     * @return mixed
+     */
+    protected function getTableLines($lines)
+    {
+        return $this->tap($lines, function(& $lines) {
+            foreach ($lines as $index => $line) {
+                $lines[$index]['aliases'] = implode(' ', $line['aliases']);
+            }
+        });
+    }
+
+    /**
+     * @param $value
+     * @param $callback
+     *
+     * @return mixed
+     */
+    protected function tap($value, $callback) {
+        $callback($value);
+
+        return $value;
     }
 }

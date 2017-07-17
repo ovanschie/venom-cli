@@ -17,9 +17,6 @@ class ShowCommand extends Command
      */
     protected $output;
 
-    /**
-     *
-     */
     public function configure()
     {
         $this->setName('show')
@@ -89,7 +86,7 @@ class ShowCommand extends Command
      */
     protected function getTableLines($lines)
     {
-        return $this->tap($lines, function(& $lines) {
+        return $this->tap($lines, function (&$lines) {
             foreach ($lines as $index => $line) {
                 $lines[$index]['aliases'] = implode(' ', $line['aliases']);
             }
@@ -102,7 +99,8 @@ class ShowCommand extends Command
      *
      * @return mixed
      */
-    protected function tap($value, $callback) {
+    protected function tap($value, $callback)
+    {
         $callback($value);
 
         return $value;

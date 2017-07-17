@@ -15,9 +15,9 @@ class SetCommand extends Command
     {
         $this->setName('set')
                 ->setDescription('Add/update hosts file entry')
-                ->addArgument('ip', InputArgument::REQUIRED, 'IP-adres')
+                ->addArgument('ip', InputArgument::REQUIRED, 'IP address')
                 ->addArgument('domain', InputArgument::REQUIRED, 'Domain')
-                ->addArgument('aliases', InputArgument::OPTIONAL, 'Aliases');
+                ->addArgument('aliases', InputArgument::IS_ARRAY, 'Aliases (space separated)');
     }
 
     /**
@@ -36,7 +36,7 @@ class SetCommand extends Command
             throw new Exception(sprintf("'%s', is not a valid domain", $input->getArgument('domain')));
         }
 
-        $aliases = '';
+        $aliases = [];
 
         if ($input->hasArgument('aliases')) {
             $aliases = $input->getArgument('aliases');
@@ -45,6 +45,6 @@ class SetCommand extends Command
         $host = new HostsFile();
         $host->set($input->getArgument('ip'), $input->getArgument('domain'), $aliases)->save();
 
-        $output->writeln(sprintf('Set: %s %s %s', $input->getArgument('ip'), $input->getArgument('domain'), $aliases));
+        $output->writeln(sprintf('Set: %s - %s [%s]', $input->getArgument('ip'), $input->getArgument('domain'), implode(', ', $aliases)));
     }
 }
